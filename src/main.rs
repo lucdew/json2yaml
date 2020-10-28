@@ -5,7 +5,6 @@ extern crate clap;
 
 use clap::{App, Arg};
 use serde_json::Value;
-use std::error::Error;
 use std::fmt;
 use std::fs;
 use std::fs::File;
@@ -31,19 +30,19 @@ impl fmt::Display for MyError {
 
 impl From<serde_yaml::Error> for MyError {
     fn from(err: serde_yaml::Error) -> Self {
-        MyError::new(err.description())
+        MyError::new(err.to_string().as_str())
     }
 }
 
 impl From<serde_json::Error> for MyError {
     fn from(err: serde_json::Error) -> Self {
-        MyError::new(err.description())
+        MyError::new(err.to_string().as_str())
     }
 }
 
 impl From<std::io::Error> for MyError {
     fn from(err: std::io::Error) -> Self {
-        MyError::new(err.description())
+        MyError::new(err.to_string().as_str())
     }
 }
 
