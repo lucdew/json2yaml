@@ -8,6 +8,7 @@ use serde_json::Value;
 use std::fmt;
 use std::fs;
 use std::fs::File;
+use std::process::exit;
 
 #[derive(Debug)]
 struct MyError {
@@ -120,7 +121,8 @@ fn do_main() -> Result<(), MyError> {
 }
 
 fn main() {
-    do_main().map_err(|err| {
-        println!("error: {}", err.details);
-    });
+    if let Err(err) = do_main() {
+        eprintln!("error: {}", err.details);
+        exit(1);
+    }
 }
