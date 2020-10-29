@@ -78,7 +78,7 @@ fn yaml_to_json(src: &str, dest: Option<&str>) -> Result<(), MyError> {
     Ok(())
 }
 
-fn main() -> Result<(), MyError> {
+fn do_main() -> Result<(), MyError> {
     let matches = App::new("json2yaml")
         .version("0.1")
         .author("Luc Dew")
@@ -117,4 +117,10 @@ fn main() -> Result<(), MyError> {
     }
 
     Ok(())
+}
+
+fn main() {
+    do_main().map_err(|err| {
+        println!("error: {}", err.details);
+    });
 }
